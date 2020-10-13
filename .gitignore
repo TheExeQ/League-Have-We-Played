@@ -33,6 +33,7 @@
 
 # Binaries
 **/bin/
+**/obj/
 !vendor/premake/bin/
 bin-int/
 
