@@ -41,10 +41,14 @@ namespace HaveWePlayed
                     break;
             }
 
+            Console.InputEncoding = System.Text.Encoding.Unicode;
+
             Console.WriteLine("input Player 1");
             string playerOne = Console.ReadLine();
             Console.WriteLine("input Player 2");
             string playerTwo = Console.ReadLine();
+
+            Console.InputEncoding = System.Text.Encoding.ASCII;
 
             Console.WriteLine("NOTE: can only search 2 000 games per sec or 10 000 games every 2 min");
             Console.WriteLine("input Player 1 Range (Search for x recent games)");
