@@ -1,0 +1,15 @@
+C:\dev\LeagueAPI\HaveWePlayed\bin\Debug\netcoreapp3.1\HaveWePlayed.exe
+C:\dev\LeagueAPI\HaveWePlayed\bin\Debug\netcoreapp3.1\HaveWePlayed.deps.json
+C:\dev\LeagueAPI\HaveWePlayed\bin\Debug\netcoreapp3.1\HaveWePlayed.runtimeconfig.json
+C:\dev\LeagueAPI\HaveWePlayed\bin\Debug\netcoreapp3.1\HaveWePlayed.runtimeconfig.dev.json
+C:\dev\LeagueAPI\HaveWePlayed\bin\Debug\netcoreapp3.1\HaveWePlayed.dll
+C:\dev\LeagueAPI\HaveWePlayed\bin\Debug\netcoreapp3.1\HaveWePlayed.pdb
+C:\dev\LeagueAPI\HaveWePlayed\obj\Debug\netcoreapp3.1\HaveWePlayed.csprojAssemblyReference.cache
+C:\dev\LeagueAPI\HaveWePlayed\obj\Debug\netcoreapp3.1\HaveWePlayed.AssemblyInfoInputs.cache
+C:\dev\LeagueAPI\HaveWePlayed\obj\Debug\netcoreapp3.1\HaveWePlayed.AssemblyInfo.cs
+C:\dev\LeagueAPI\HaveWePlayed\obj\Debug\netcoreapp3.1\HaveWePlayed.dll
+C:\dev\LeagueAPI\HaveWePlayed\obj\Debug\netcoreapp3.1\HaveWePlayed.pdb
+C:\dev\LeagueAPI\HaveWePlayed\obj\Debug\netcoreapp3.1\HaveWePlayed.genruntimeconfig.cache
+C:\dev\LeagueAPI\HaveWePlayed\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
+C:\dev\LeagueAPI\HaveWePlayed\obj\Debug\netcoreapp3.1\HaveWePlayed.csproj.CoreCompileInputs.cache
+C:\dev\LeagueAPI\HaveWePlayed\obj\Debug\netcoreapp3.1\HaveWePlayed.csproj.CopyComplete
