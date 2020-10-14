@@ -10,45 +10,12 @@ namespace HaveWePlayed.src
     {
         public async Task<string> GetAccountId(string api_key, string summonername, string server)
         {
-            HttpClient client = new HttpClient();
-            HttpRequestMessage request = new HttpRequestMessage()
+            try
             {
-                RequestUri = new Uri($"https://{server}.api.riotgames.com/lol/summoner/v4/summoners/by-name/{summonername}"),
-                Method = HttpMethod.Get
-            };
-
-            request.Headers.Add("X-Riot-Token", api_key);
-
-            HttpResponseMessage response = await client.SendAsync(request);
-
-            var result = JsonConvert.DeserializeObject<Data.SummonerRoot>(response.Content.ReadAsStringAsync().Result);
-
-            return result.accountId;
-        }
-
-        public async Task<List<string>> GetDataList(string api_key, string summonername, string server, int searchGames)
-        {
-            string accountId = GetAccountId(api_key, summonername, server).Result;
-
-            HttpClient client = new HttpClient();
-
-            List<string> MatchIds = new List<string>();
-
-            int gamesPlayed = 0;
-
-            int beginIndex = 0;
-            int endIndex = 100;
-
-            if (searchGames < 100)
-            {
-                endIndex = searchGames;
-            }
-
-            do
-            {
+                HttpClient client = new HttpClient();
                 HttpRequestMessage request = new HttpRequestMessage()
                 {
-                    RequestUri = new Uri($"https://{server}.api.riotgames.com/lol/match/v4/matchlists/by-account/{accountId}?endIndex={ endIndex }&beginIndex={ beginIndex }"),
+                    RequestUri = new Uri($"https://{server}.api.riotgames.com/lol/summoner/v4/summoners/by-name/{summonername}"),
                     Method = HttpMethod.Get
                 };
 
@@ -56,34 +23,99 @@ namespace HaveWePlayed.src
 
                 HttpResponseMessage response = await client.SendAsync(request);
 
-                var result = JsonConvert.DeserializeObject<Data.MatchRoot>(response.Content.ReadAsStringAsync().Result);
+                var result = JsonConvert.DeserializeObject<Data.SummonerRoot>(response.Content.ReadAsStringAsync().Result);
 
-                foreach (var match in result.matches)
+                return result.accountId;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(
+                    "Something went wrong\n" +
+                    "--------------\n" +
+                    e);
+                Console.WriteLine("--------------");
+                Console.WriteLine("Program closing in 5 seconds.");
+
+                System.Threading.Thread.Sleep(5000);
+                Environment.Exit(0);
+                throw;
+            }
+        }
+
+        public async Task<List<string>> GetDataList(string api_key, string summonername, string server, int searchGames)
+        {
+            try
+            {
+                string accountId = GetAccountId(api_key, summonername, server).Result;
+
+                HttpClient client = new HttpClient();
+
+                List<string> MatchIds = new List<string>();
+
+                int gamesPlayed = 0;
+
+                int beginIndex = 0;
+                int endIndex = 100;
+
+                if (searchGames < 100)
                 {
-                    MatchIds.Add(match.gameId);
+                    endIndex = searchGames;
                 }
 
-                beginIndex += 100;
-                endIndex = beginIndex + 100;
-
-                if (searchGames >= 2000)
+                do
                 {
-                    System.Threading.Thread.Sleep(50);
-                }
+                    HttpRequestMessage request = new HttpRequestMessage()
+                    {
+                        RequestUri = new Uri($"https://{server}.api.riotgames.com/lol/match/v4/matchlists/by-account/{accountId}?endIndex={ endIndex }&beginIndex={ beginIndex }"),
+                        Method = HttpMethod.Get
+                    };
 
-                gamesPlayed = result.totalGames;
+                    request.Headers.Add("X-Riot-Token", api_key);
 
-            } while (searchGames > beginIndex);
+                    HttpResponseMessage response = await client.SendAsync(request);
 
-            Console.OutputEncoding = System.Text.Encoding.Unicode;
+                    var result = JsonConvert.DeserializeObject<Data.MatchRoot>(response.Content.ReadAsStringAsync().Result);
 
-            Console.WriteLine("-------------");
-            Console.WriteLine($"{summonername}'s total games played: " + gamesPlayed);
-            Console.WriteLine("-------------");
+                    foreach (var match in result.matches)
+                    {
+                        MatchIds.Add(match.gameId);
+                    }
 
-            Console.OutputEncoding = System.Text.Encoding.ASCII;
+                    beginIndex += 100;
+                    endIndex = beginIndex + 100;
 
-            return MatchIds;
+                    if (searchGames >= 2000)
+                    {
+                        System.Threading.Thread.Sleep(50);
+                    }
+
+                    gamesPlayed = result.totalGames;
+
+                } while (searchGames > beginIndex);
+
+                Console.OutputEncoding = System.Text.Encoding.Unicode;
+
+                Console.WriteLine("-------------");
+                Console.WriteLine($"{summonername}'s total games played: " + gamesPlayed);
+                Console.WriteLine("-------------");
+
+                Console.OutputEncoding = System.Text.Encoding.ASCII;
+
+                return MatchIds;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(
+                    "Something went wrong\n" +
+                    "--------------\n" +
+                    e);
+                Console.WriteLine("--------------");
+                Console.WriteLine("Program closing in 5 seconds.");
+
+                System.Threading.Thread.Sleep(5000);
+                Environment.Exit(0);
+                throw;
+            }
         }
     }
 }
