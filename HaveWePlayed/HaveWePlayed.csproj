@@ -3,6 +3,8 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <AssemblyName>LOL-HaveWePlayed</AssemblyName>
+    <RootNamespace>HaveWePlayed</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

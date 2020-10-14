@@ -34,6 +34,8 @@ namespace HaveWePlayed.src
 
             List<string> MatchIds = new List<string>();
 
+            int gamesPlayed = 0;
+
             int beginIndex = 0;
             int endIndex = 100;
 
@@ -69,7 +71,17 @@ namespace HaveWePlayed.src
                     System.Threading.Thread.Sleep(50);
                 }
 
+                gamesPlayed = result.totalGames;
+
             } while (searchGames > beginIndex);
+
+            Console.OutputEncoding = System.Text.Encoding.Unicode;
+
+            Console.WriteLine("-------------");
+            Console.WriteLine($"{summonername}'s total games played: " + gamesPlayed);
+            Console.WriteLine("-------------");
+
+            Console.OutputEncoding = System.Text.Encoding.ASCII;
 
             return MatchIds;
         }

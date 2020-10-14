@@ -8,28 +8,18 @@ namespace HaveWePlayed
     {
         static void Main(string[] args)
         {
+            restart:
             Run();
             Console.ReadLine();
+            goto restart;
         }
 
         static async void Run()
         {
-            bool debug = false;
-
             string api_key;
             string server;
             string playerOne;
             string playerTwo;
-
-            // Ignore this, this is just so i can debug directly from code.
-            if (debug)
-            {
-                api_key = "";
-                server = "";
-                playerOne = "";
-                playerTwo = "";
-                goto debug;
-            }
 
             Console.WriteLine("Input API Key, can be found on this site: https://developer.riotgames.com/");
             api_key = Console.ReadLine();
@@ -68,8 +58,6 @@ namespace HaveWePlayed
 
             Console.InputEncoding = System.Text.Encoding.ASCII;
 
-            debug:
-
             Console.WriteLine("NOTE: can only search 2 000 games per sec or 10 000 games every 2 min");
             Console.WriteLine("input Player 1 Range (Search for x recent games)");
             int playerOneSearchRange = Int32.Parse(Console.ReadLine());
@@ -85,6 +73,8 @@ namespace HaveWePlayed
             Console.WriteLine("-------------");
             Console.WriteLine("List of MatchIDS");
             Console.WriteLine("-------------");
+
+            Console.OutputEncoding = System.Text.Encoding.Unicode;
 
             if (player1Matches.Count > player2Matches.Count)
             {
@@ -108,12 +98,14 @@ namespace HaveWePlayed
                     {
                         if (player2Matches[i] == player1Matches[j])
                         {
-                            Console.WriteLine($"https://blitz.gg/lol/match/{ server }/{ playerTwo }/{ player2Matches[i] }");
+                            Console.WriteLine($"https://blitz.gg/lol/match/{ server }/{ playerOne }/{ player2Matches[i] }");
                             amountOfGames++;
                         }
                     }
                 }
             }
+
+            Console.OutputEncoding = System.Text.Encoding.ASCII;
 
             Console.WriteLine("-------------");
             Console.WriteLine("Successfully Searched: " + player1Matches.Count + " Matches from Player 1");
