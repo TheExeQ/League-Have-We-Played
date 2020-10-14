@@ -1,5 +1,6 @@
 ﻿using HaveWePlayed.src;
 using System;
+using System.Diagnostics;
 
 namespace HaveWePlayed
 {
@@ -13,15 +14,32 @@ namespace HaveWePlayed
 
         static async void Run()
         {
+            bool debug = false;
+
+            string api_key;
+            string server;
+            string playerOne;
+            string playerTwo;
+
+            // Ignore this, this is just so i can debug directly from code.
+            if (debug)
+            {
+                api_key = "";
+                server = "";
+                playerOne = "";
+                playerTwo = "";
+                goto debug;
+            }
+
             Console.WriteLine("Input API Key, can be found on this site: https://developer.riotgames.com/");
-            var api_key = Console.ReadLine();
+            api_key = Console.ReadLine();
             Console.Clear();
 
             Console.WriteLine("[ 1 ] NA");
             Console.WriteLine("[ 2 ] EUW");
             Console.WriteLine("[ 3 ] EUNE");
 
-            string server = Console.ReadLine();
+            server = Console.ReadLine();
 
             switch (server)
             {
@@ -44,11 +62,13 @@ namespace HaveWePlayed
             Console.InputEncoding = System.Text.Encoding.Unicode;
 
             Console.WriteLine("input Player 1");
-            string playerOne = Console.ReadLine();
+            playerOne = Console.ReadLine();
             Console.WriteLine("input Player 2");
-            string playerTwo = Console.ReadLine();
+            playerTwo = Console.ReadLine();
 
             Console.InputEncoding = System.Text.Encoding.ASCII;
+
+            debug:
 
             Console.WriteLine("NOTE: can only search 2 000 games per sec or 10 000 games every 2 min");
             Console.WriteLine("input Player 1 Range (Search for x recent games)");
@@ -65,6 +85,7 @@ namespace HaveWePlayed
             Console.WriteLine("-------------");
             Console.WriteLine("List of MatchIDS");
             Console.WriteLine("-------------");
+
             if (player1Matches.Count > player2Matches.Count)
             {
                 for (int i = 0; i < player1Matches.Count; i++)
@@ -73,7 +94,7 @@ namespace HaveWePlayed
                     {
                         if (player1Matches[i] == player2Matches[j])
                         {
-                            Console.WriteLine(player1Matches[i]);
+                            Console.WriteLine($"https://blitz.gg/lol/match/{ server }/{ playerOne }/{ player1Matches[i] }");
                             amountOfGames++;
                         }
                     }
@@ -87,7 +108,7 @@ namespace HaveWePlayed
                     {
                         if (player2Matches[i] == player1Matches[j])
                         {
-                            Console.WriteLine(player2Matches[i]);
+                            Console.WriteLine($"https://blitz.gg/lol/match/{ server }/{ playerTwo }/{ player2Matches[i] }");
                             amountOfGames++;
                         }
                     }
@@ -95,6 +116,8 @@ namespace HaveWePlayed
             }
 
             Console.WriteLine("-------------");
+            Console.WriteLine("Successfully Searched: " + player1Matches.Count + " Matches from Player 1");
+            Console.WriteLine("Successfully Searched: " + player2Matches.Count + " Matches from Player 2");
             Console.WriteLine("Total Games found: " + amountOfGames);
             Console.WriteLine("-------------");
         }

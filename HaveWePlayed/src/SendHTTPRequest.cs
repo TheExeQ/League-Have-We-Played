@@ -64,6 +64,11 @@ namespace HaveWePlayed.src
                 beginIndex += 100;
                 endIndex = beginIndex + 100;
 
+                if (searchGames >= 2000)
+                {
+                    System.Threading.Thread.Sleep(50);
+                }
+
             } while (searchGames > beginIndex);
 
             return MatchIds;
