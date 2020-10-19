@@ -8,6 +8,7 @@ namespace HaveWePlayed
     {
         static void Main(string[] args)
         {
+            Console.Title = "Have We Played?";
             restart:
             Run();
             Console.ReadLine();
@@ -105,13 +106,14 @@ namespace HaveWePlayed
                 }
             }
 
-            Console.OutputEncoding = System.Text.Encoding.ASCII;
 
             Console.WriteLine("-------------");
-            Console.WriteLine("Successfully Searched: " + player1Matches.Count + " Matches from Player 1");
-            Console.WriteLine("Successfully Searched: " + player2Matches.Count + " Matches from Player 2");
+            Console.WriteLine("Successfully Searched: " + player1Matches.Count + " Matches from " + playerOne);
+            Console.WriteLine("Successfully Searched: " + player2Matches.Count + " Matches from " + playerTwo);
             Console.WriteLine("Total Games found: " + amountOfGames);
             Console.WriteLine("-------------");
+
+            Console.OutputEncoding = System.Text.Encoding.ASCII;
         }
     }
 }
